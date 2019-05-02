@@ -17,7 +17,7 @@ export default {
     yearResourceTableWidth: 160,
     customResourceTableWidth: 160,
 
-    dayCellWidth: 30,
+    dayCellWidth: 80,
     weekCellWidth: '12%',
     monthCellWidth: 80,
     quarterCellWidth: 80,

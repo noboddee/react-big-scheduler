@@ -51,6 +51,7 @@ async function build() {
     const heckResult = await exec(
       `lessc --js ${hackFileSource} ${hackFileOutputPath}`
     );
+    process.stdout.write('Implementing antd hack done... \n');
     // append lib/index.js with line importing antd-hack
     const linesToBeAdded = [
       '',

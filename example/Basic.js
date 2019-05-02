@@ -12,25 +12,40 @@ import withDragDropContext from './withDnDContext'
 class Basic extends Component{
     constructor(props){
         super(props);
-
+        this.parentRef = React.createRef()
         //let schedulerData = new SchedulerData(new moment("2017-12-18").format(DATE_FORMAT), ViewTypes.Week);
-        let schedulerData = new SchedulerData('2017-12-18', ViewTypes.Week);
+        let schedulerData = new SchedulerData('2017-12-18', ViewTypes.Week, false, false, {
+          schedulerWidth: 400
+        });
         schedulerData.localeMoment.locale('en');
         schedulerData.setResources(DemoData.resources);
         schedulerData.setEvents(DemoData.events);
         this.state = {
             viewModel: schedulerData
         }
+      window.onresize = this.onWindowResize;
     }
+
+  onWindowResize = (e) => {
+    const {viewModel} = this.state;
+    const divWidth = document.documentElement.clientWidth * 0.8
+    console.log('new width', this.parentRef.current.clientWidth)
+    viewModel.setSchedulerWidth(divWidth);
+    this.setState({
+      viewModel,
+      divWidth
+    });
+  }
 
     render(){
         const {viewModel} = this.state;
         return (
             <div>
                 <Nav />
-                <div>
+                <div ref={this.parentRef} style={{width: document.documentElement.clientWidth * 0.8, backgroundColor: 'rgba(3,173,255,0.1)'}}>
                     <h3 style={{textAlign: 'center'}}>Basic example<ViewSrcCode srcCodeUrl="https://github.com/StephenChou1017/react-big-scheduler/blob/master/example/Basic.js" /></h3>
                     <Scheduler schedulerData={viewModel}
+                               parentRef={this.parentRef}
                                prevClick={this.prevClick}
                                nextClick={this.nextClick}
                                onSelectDate={this.onSelectDate}
