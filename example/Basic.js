@@ -14,8 +14,10 @@ class Basic extends Component{
         super(props);
         this.parentRef = React.createRef()
         //let schedulerData = new SchedulerData(new moment("2017-12-18").format(DATE_FORMAT), ViewTypes.Week);
-        let schedulerData = new SchedulerData('2017-12-18', ViewTypes.Week, false, false, {
-          schedulerWidth: 400
+        let schedulerData = new SchedulerData('2017-12-18', ViewTypes.Day, false, false, {
+          schedulerWidth: 800,
+          dayStartFrom: 6,
+          checkConflict: true
         });
         schedulerData.localeMoment.locale('en');
         schedulerData.setResources(DemoData.resources);
@@ -42,7 +44,7 @@ class Basic extends Component{
         return (
             <div>
                 <Nav />
-                <div ref={this.parentRef} style={{width: document.documentElement.clientWidth * 0.8, backgroundColor: 'rgba(3,173,255,0.1)'}}>
+                <div ref={this.parentRef} style={{width: document.documentElement.clientWidth * 0.8}}>
                     <h3 style={{textAlign: 'center'}}>Basic example<ViewSrcCode srcCodeUrl="https://github.com/StephenChou1017/react-big-scheduler/blob/master/example/Basic.js" /></h3>
                     <Scheduler schedulerData={viewModel}
                                parentRef={this.parentRef}
@@ -63,6 +65,7 @@ class Basic extends Component{
                                onScrollRight={this.onScrollRight}
                                onScrollTop={this.onScrollTop}
                                onScrollBottom={this.onScrollBottom}
+                               conflictOccurred={this.conflictOccurred}
                     />
                 </div>
                 <Tips />
@@ -196,6 +199,10 @@ class Basic extends Component{
     onScrollBottom = (schedulerData, schedulerContent, maxScrollTop) => {
         console.log('onScrollBottom');
     }
+
+  conflictOccurred = (schedulerData, action, event, type, slotId, slotName, start, end) => {
+    alert(`Conflict occurred. {action: ${action}, event: ${event}`);
+  }
 }
 
 export default withDragDropContext(Basic)

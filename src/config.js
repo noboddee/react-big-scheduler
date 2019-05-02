@@ -3,21 +3,21 @@ import SummaryPos from './SummaryPos'
 
 export default {
     schedulerWidth: '100%',
-    besidesWidth: 20,
+    besidesWidth: 10,
     schedulerMaxHeight: 0,
-    tableHeaderHeight: 40,
+    tableHeaderHeight: 60,
 
     agendaResourceTableWidth: 160,
     agendaMaxEventWidth: 100,
 
-    dayResourceTableWidth: 160,
+    dayResourceTableWidth: 200,
     weekResourceTableWidth: '16%',
     monthResourceTableWidth: 160,
     quarterResourceTableWidth: 160,
     yearResourceTableWidth: 160,
     customResourceTableWidth: 160,
 
-    dayCellWidth: 80,
+    dayCellWidth: 40,
     weekCellWidth: '12%',
     monthCellWidth: 80,
     quarterCellWidth: 80,
@@ -31,16 +31,16 @@ export default {
     yearMaxEvents: 99,
     customMaxEvents: 99,
 
-    eventItemHeight: 22,
-    eventItemLineHeight: 24,
+    eventItemHeight: 40,
+    eventItemLineHeight: 60,
     nonAgendaSlotMinHeight: 0,
     dayStartFrom: 0,
     dayStopTo: 23,
-    defaultEventBgColor: '#80C5F6',
+    defaultEventBgColor: '#ffffff',
     selectedAreaColor: '#7EC2F3',
     nonWorkingTimeHeadColor: '#999999',
-    nonWorkingTimeHeadBgColor: '#fff0f6',
-    nonWorkingTimeBodyBgColor: '#fff0f6',
+    nonWorkingTimeHeadBgColor: '#fafafa',
+    nonWorkingTimeBodyBgColor: '#fafafa',
     summaryColor: '#666',
     summaryPos: SummaryPos.TopRight,
 
