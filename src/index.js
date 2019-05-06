@@ -233,7 +233,7 @@ class Scheduler extends Component {
                 <div style={{overflowX: 'scroll', overflowY: 'hidden', margin: `0px 0px -${contentScrollbarHeight}px`}}>
                   <table className="resource-table">
                     <thead>
-                      {/*<tr style={{height: config.tableHeaderHeight}}>
+                    {/*<tr style={{height: config.tableHeaderHeight}}>
                         <th className="header3-text">
                           {resourceName}
                         </th>
@@ -295,8 +295,10 @@ class Scheduler extends Component {
     let schedulerHeader = <div/>
     if (config.headerEnabled) {
       schedulerHeader = (
-        <Row type="flex" align="middle" justify="space-between" style={{marginBottom: '24px'}}>
-          {leftCustomHeader}
+        <Row type="flex" align="bottom" justify="space-between" style={{marginBottom: '24px'}}>
+          <Col>
+            {leftCustomHeader}
+          </Col>
           <Col>
             <div className='header2-text'>
               <Icon type="left" style={{marginRight: '8px'}} className="icon-nav"
