@@ -92,13 +92,13 @@ class Basic extends Component {
   }
 
   prevClick = (schedulerData) => {
-   /* if (schedulerData.viewType === ViewTypes.Day) {
-      newCurrentDate.subtract(1, 'd')
-    } else if (schedulerData.viewType === ViewTypes.Week) {
-      newCurrentDate.subtract(1, 'w')
-    } else if (schedulerData.viewType === ViewTypes.Month) {
-      newCurrentDate.subtract(1, 'm')
-    }*/
+    /* if (schedulerData.viewType === ViewTypes.Day) {
+       newCurrentDate.subtract(1, 'd')
+     } else if (schedulerData.viewType === ViewTypes.Week) {
+       newCurrentDate.subtract(1, 'w')
+     } else if (schedulerData.viewType === ViewTypes.Month) {
+       newCurrentDate.subtract(1, 'm')
+     }*/
 
     schedulerData.prev()
     schedulerData.setEvents(DemoData.events)
@@ -185,27 +185,28 @@ class Basic extends Component {
   }
 
   newEvent = (schedulerData, slotId, slotName, start, end, type, item) => {
-    if (confirm(`Do you want to create a new event? {slotId: ${slotId}, slotName: ${slotName}, start: ${start}, end: ${end}, type: ${type}, item: ${item}}`)) {
+    //if (confirm(`Do you want to create a new event? {slotId: ${slotId}, slotName: ${slotName}, start: ${start}, end: ${end}, type: ${type}, item: ${item}}`)) {
 
-      let newFreshId = 0
-      schedulerData.events.forEach((item) => {
-        if (item.id >= newFreshId)
-          newFreshId = item.id + 1
-      })
+    let newFreshId = 0
+    schedulerData.events.forEach((item) => {
+      if (item.id >= newFreshId)
+        newFreshId = item.id + 1
+    })
 
-      let newEvent = {
-        id: newFreshId,
-        title: 'New event you just created',
-        start: start,
-        end: end,
-        resourceId: slotId,
-        bgColor: 'purple'
-      }
-      schedulerData.addEvent(newEvent)
-      this.setState({
-        viewModel: schedulerData
-      })
+    let newEvent = {
+      id: newFreshId,
+      title: '',
+      start: start,
+      end: end,
+      resourceId: slotId
     }
+    schedulerData.addEvent(newEvent)
+    this.eventClicked(schedulerData, newEvent)
+
+    this.setState({
+      viewModel: schedulerData
+    })
+    //}
   }
 
   updateEventStart = (schedulerData, event, newStart) => {
@@ -273,41 +274,41 @@ class Basic extends Component {
 
   getDateLabel = (schedulerData, viewType, startDate, endDate) => {
     console.log('run get Label')
-    let start = schedulerData.localeMoment(startDate);
-    let end = schedulerData.localeMoment(endDate);
-    let dateLabel = start.format('dddd DD MMMM');
+    let start = schedulerData.localeMoment(startDate)
+    let end = schedulerData.localeMoment(endDate)
+    let dateLabel = start.format('dddd DD MMMM')
 
     if (viewType === ViewTypes.Week) {
-      dateLabel = `${start.format('D')} - ${end.format('D MMM YYYY')}`;
+      dateLabel = `${start.format('D')} - ${end.format('D MMM YYYY')}`
       if (start.month() !== end.month())
-        dateLabel = `${start.format('D MMM')} - ${end.format('D MMM YYYY')}`;
+        dateLabel = `${start.format('D MMM')} - ${end.format('D MMM YYYY')}`
       if (start.year() !== end.year())
-        dateLabel = `${start.format('D MMM YYYY')} - ${end.format('D MMM YYYY')}`;
+        dateLabel = `${start.format('D MMM YYYY')} - ${end.format('D MMM YYYY')}`
     }
     else if (viewType === ViewTypes.Month) {
       dateLabel = start.format('MMMM YYYY')
     }
     else if (viewType === ViewTypes.Year) {
-      dateLabel = start.format('YYYY');
+      dateLabel = start.format('YYYY')
     }
 
-    return dateLabel;
+    return dateLabel
   }
 
   nonAgendaCellHeaderTemplateResolver = (schedulerData, item, formattedDateItems, style) => {
-    let datetime = schedulerData.localeMoment(item.time);
-    let isCurrentDate = false;
+    let datetime = schedulerData.localeMoment(item.time)
+    let isCurrentDate = false
 
     if (schedulerData.viewType === ViewTypes.Day) {
-      isCurrentDate = datetime.isSame(new Date(), 'hour');
+      isCurrentDate = datetime.isSame(new Date(), 'hour')
     }
     else {
-      isCurrentDate = datetime.isSame(new Date(), 'day');
+      isCurrentDate = datetime.isSame(new Date(), 'day')
     }
 
     if (isCurrentDate) {
-      style.backgroundColor = '#2ab8a9';
-      style.color = '#ffffff';
+      style.backgroundColor = '#2ab8a9'
+      style.color = '#ffffff'
     }
 
     return (
@@ -319,7 +320,7 @@ class Basic extends Component {
           ))
         }
       </th>
-    );
+    )
   }
 
 }
